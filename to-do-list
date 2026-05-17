@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    vector<string> tasks;
+    int choice;
+
+    do
+    {
+        cout << "\n===== TODO LIST MANAGER =====" << endl;
+        cout << "1. Add Task" << endl;
+        cout << "2. View Tasks" << endl;
+        cout << "3. Delete Task" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+        if (choice < 1 || choice > 4)
+        {
+            cout << "Invalid choice! Try again." << endl;
+        }
+
+        if (choice == 1)
+        {
+            string newTask;
+            cin.ignore(); // clears the enter key from previous input
+            cout << "Enter task: ";
+            getline(cin, newTask);
+            tasks.push_back(newTask);
+            cout << "Task added!" << endl;
+        }
+        else if (choice == 2)
+        {
+            if (tasks.empty())
+            {
+                cout << "No tasks yet!" << endl;
+            }
+            else
+            {
+                cout << "\nYour Tasks:" << endl;
+                for (int i = 0; i < tasks.size(); i++)
+                {
+                    cout << i + 1 << ". " << tasks[i] << endl;
+                }
+            }
+        }
+        else if (choice == 3)
+        {
+            if (tasks.empty())
+            {
+                cout << "No tasks to delete!" << endl;
+            }
+            else
+            {
+                cout << "\nYour Tasks:" << endl;
+                for (int i = 0; i < tasks.size(); i++)
+                {
+                    cout << i + 1 << ". " << tasks[i] << endl;
+                }
+                int delNum;
+                cout << "Enter task number to delete: ";
+                cin >> delNum;
+
+                if (delNum >= 1 && delNum <= tasks.size())
+                {
+                    tasks.erase(tasks.begin() + delNum - 1);
+                    cout << "Task deleted!" << endl;
+                }
+                else
+                {
+                    cout << "Invalid number!" << endl;
+                }
+            }
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
